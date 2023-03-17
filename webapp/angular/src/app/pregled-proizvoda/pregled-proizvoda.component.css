@@ -1,0 +1,30 @@
+.filteri {
+  display: flex;
+  align-items: center;
+}
+
+.filteri .search-input {
+  margin-right: 10px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 8px;
+  outline: none;
+  margin-left: 10px;
+  width: 800px;
+  margin-bottom: 20px;
+}
+
+.filteri .grad-container {
+  display: flex;
+  align-items: center;
+  margin-left: 60px;
+  margin-bottom: 28px;
+  width: 300px;
+  margin-top: 7px;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.sort-container{
+  margin-bottom: 22px;
+}

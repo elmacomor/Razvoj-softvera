@@ -1,0 +1,76 @@
+<app-navbar-uposlenik></app-navbar-uposlenik>
+<!--Dodaj proizvod-->
+<button type="button" class="btn btn-primary btn-lg"
+        style="margin-bottom: 5px; margin-top: 5px;margin-left: 85%;background-color: #335242; border: none"
+        (click)="noviProizvod_dugme()">Dodaj proizvod</button>
+<!--Modal dialog za dodavanje proizvoda-->
+<div *ngIf="noviProizvod!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">Novi proizvod </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="noviProizvod=null"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Marka</label>
+          <input class="form-control" placeholder="Marka" [(ngModel)]="noviProizvod.marka">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Boja</label>
+          <input class="form-control" placeholder="Boja" [(ngModel)]="noviProizvod.boja">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Specifikacije</label>
+          <input class="form-control" placeholder="Specifikacije" [(ngModel)]="noviProizvod.specifikacije"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Kratak opis</label>
+          <input class="form-control" placeholder="Kratak opis" [(ngModel)]="noviProizvod.kratakOpisProizvoda"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Tip proizvoda</label>
+          <select class="form-control" [(ngModel)]="noviProizvod.proizvodTipID">
+            <option *ngFor="let x of tipProizvodaPodaci" [value]="x.id">{{x.naziv}}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Cijena</label>
+          <input class="form-control" placeholder="Cijena" [(ngModel)]="noviProizvod.cijena"/>
+        </div>
+
+        <div class="mb-3" *ngIf="noviProizvod.id==0">
+          <label class="form-label">Nova slika</label>
+          <input class="form-control" id="slika-input" type="file"  accept="image/*" (change)="generisi_preview()" />
+          <img style="max-width: 100%; height: 200px" src="{{noviProizvod.slika_bajtovi}}">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="noviProizvod=null">Close</button>
+        <button type="button" class="btn btn-primary" (click)="SnimiProizvode()" >Spremi promjene</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--Get proizvodi-->
+<div style="display:grid; grid-template-columns: repeat(4, 1fr);">
+  <div class="card" *ngFor="let x of GetProizvodi()" style="margin: 5px">
+    <img class="card-img-top" style="width:250px;height: 250px; margin:auto" src="{{GetSlikaBase64Umanjena_fs(x)}}" alt="Card image cap">
+    <div class="card-body" style="margin: auto">
+      <h5 class="card-title">{{x.marka}}</h5>
+      <h5 class="cijena">{{x.cijena}} KM</h5>
+    </div>
+    <p class="card-text" style="margin:auto;margin-bottom: 30px">{{x.kratakOpisProizvoda}}</p>
+    <a class="btn btn-primary" style="margin: auto;margin-bottom: 5px" (click)="noviProizvod=x">Uredi</a>
+    <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
